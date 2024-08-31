@@ -1,23 +1,63 @@
 /* styles.css */
 
+/* General Body Styling */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f5;
+    background-color: #f0f0f5; /* Light background color */
     color: #333;
 }
 
+/* Header Styling */
 header {
-    background: linear-gradient(90deg, #4b6cb7, #182848);
+    background-color: #4b6cb7; /* Solid color fallback */
     color: #fff;
     padding: 20px;
     text-align: center;
+    position: relative;
 }
 
 header h1 {
     margin: 0;
     font-size: 2.5em;
+    font-weight: bold; /* Make header text bold */
+}
+
+/* Scrolling Message Styling */
+.scrolling-message {
+    background: #333;
+    color: #f4a261; /* Color for the scrolling text */
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-weight: bold; /* Make text bold */
+    font-size: 1.5em; /* Adjust text size */
+    margin-top: 20px; /* Space between header and scrolling message */
+}
+
+.scrolling-message p {
+    display: inline-block;
+    padding-left: 100%; /* Start off-screen */
+    animation: scroll 15s linear infinite; /* Adjust scrolling speed */
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Navigation Bar Styling */
+nav {
+    background: #182848;
+    padding: 10px 0;
 }
 
 nav ul {
@@ -25,7 +65,7 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
-    margin: 10px 0;
+    margin: 0;
 }
 
 nav ul li {
@@ -39,29 +79,66 @@ nav ul li a {
     font-size: 1.2em;
     display: flex;
     align-items: center;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #4b6cb7;
+    border-radius: 5px;
 }
 
 nav ul li a i {
     margin-right: 8px;
 }
 
-section {
+/* Main Content Margin */
+main {
+    margin-top: 20px; /* Space for header and scrolling message */
     padding: 20px;
-    margin: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Section Styling */
+section {
+    position: relative;
+    padding: 20px;
+    margin: 20px auto; /* Center align sections */
+    max-width: 1200px; /* Limit the max-width of the sections */
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Two-column layout for sections */
+.section-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.section-content img {
+    flex: 1;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.section-content .text {
+    flex: 1;
+    max-width: 100%;
+    padding: 0 20px;
+}
+
+/* Card styling for project sections */
 section h2 {
     font-size: 2em;
     color: #182848;
-    margin-bottom: 15px;
-}
-
-section img {
-    max-width: 100%;
-    border-radius: 10px;
     margin-bottom: 15px;
 }
 
@@ -84,6 +161,7 @@ section a:hover {
     background-color: #182848;
 }
 
+/* Footer Styling */
 footer {
     background-color: #182848;
     color: #fff;
@@ -92,4 +170,32 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em; /* Adjust font size for smaller screens */
+    }
+
+    .scrolling-message p {
+        font-size: 1em; /* Adjust font size for smaller screens */
+    }
+
+    section {
+        margin: 10px; /* Reduce margins for smaller screens */
+        padding: 15px; /* Reduce padding for smaller screens */
+    }
+
+    .section-content {
+        flex-direction: column; /* Stack image and text on smaller screens */
+    }
+
+    .section-content img {
+        margin-bottom: 15px; /* Add space below image */
+    }
+}
+
+@media (min-width: 769px) {
+    /* No additional styles needed for larger screens */
 }
