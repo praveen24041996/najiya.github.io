@@ -271,11 +271,6 @@ button:hover {
     background-color: #357ae8;
 }
 
-/* CAPTCHA Styling */
-.captcha-container {
-    margin: 20px 0;
-}
-
 /* Link Styling */
 p {
     text-align: center;
