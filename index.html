@@ -87,6 +87,12 @@
         <p>&copy; 2024 Modern Solutions. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Check if the user is logged in by verifying if the OTP exists in sessionStorage -->
+    <script>
+        // If OTP is not found in sessionStorage, redirect the user to the login page
+        if (!sessionStorage.getItem('otp')) {
+            window.location.href = 'login.html';  // Redirect to login page if not logged in
+        }
+    </script>
 </body>
 </html>
