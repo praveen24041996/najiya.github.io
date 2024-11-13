@@ -1,0 +1,153 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Tech and Innovation</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #0047ab;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #0047ab;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #002d72;
+        }
+
+        .otp-container {
+            display: none;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login with Mobile OTP</h2>
+
+        <!-- Phone Number Input -->
+        <div class="phone-container">
+            <input type="text" id="phone" placeholder="Enter your phone number" maxlength="10">
+            <button onclick="sendOTP()">Send OTP</button>
+            <p class="error-message" id="error-message"></p>
+        </div>
+
+        <!-- OTP Input -->
+        <div class="otp-container" id="otp-container">
+            <input type="number" id="otp" placeholder="Enter OTP">
+            <button onclick="verifyOTP()">Verify OTP</button>
+        </div>
+    </div>
+
+    <script>
+        // Phone number OTP sending logic
+        function sendOTP() {
+            var phone = document.getElementById('phone').value;
+            if (phone.length !== 10 || isNaN(phone)) {
+                document.getElementById('error-message').textContent = "Please enter a valid 10-digit phone number.";
+                return;
+            }
+
+            // Clear any previous error messages
+            document.getElementById('error-message').textContent = "";
+
+            // Send phone number to backend to send OTP (API call)
+            fetch('http://your-backend-url.com/send-otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ phone: phone }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Hide phone input and show OTP input
+                    document.querySelector('.phone-container').style.display = 'none';
+                    document.getElementById('otp-container').style.display = 'block';
+                } else {
+                    document.getElementById('error-message').textContent = "Failed to send OTP. Please try again.";
+                }
+            })
+            .catch(error => {
+                console.error('Error sending OTP:', error);
+                document.getElementById('error-message').textContent = "Error sending OTP. Please try again.";
+            });
+        }
+
+        // OTP verification logic
+        function verifyOTP() {
+            var otp = document.getElementById('otp').value;
+            if (otp.length !== 6 || isNaN(otp)) {
+                document.getElementById('error-message').textContent = "Please enter a valid 6-digit OTP.";
+                return;
+            }
+
+            // Clear any previous error messages
+            document.getElementById('error-message').textContent = "";
+
+            // Verify OTP with backend (API call)
+            fetch('http://your-backend-url.com/verify-otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ otp: otp, phone: document.getElementById('phone').value }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Redirect to main website (index.html)
+                    window.location.href = "index.html";  // Redirection to the main page
+                } else {
+                    document.getElementById('error-message').textContent = "Invalid OTP. Please try again.";
+                }
+            })
+            .catch(error => {
+                console.error('Error verifying OTP:', error);
+                document.getElementById('error-message').textContent = "Error verifying OTP. Please try again.";
+            });
+        }
+    </script>
+</body>
+</html>
