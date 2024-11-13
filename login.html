@@ -3,36 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Modern Solution</title>
+    <title>Login - Modern Solutions</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lec4n0qAAAAAIK9mNhP1PJqyiBPUNjX967yMmJX" async defer></script>
 </head>
 <body class="login-page">
 
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Login to Modern Solutions</h2>
+
+        <!-- Login Form -->
         <form id="loginForm">
-            <!-- Email/Phone input -->
             <div class="input-group">
-                <label for="email">Email or Phone</label>
-                <input type="text" id="email" name="email" required>
-            </div>
-            <!-- Password input -->
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <label for="phone">Phone Number or Email:</label>
+                <input type="text" id="phone" name="phone" required placeholder="Enter your phone number or email">
             </div>
 
-            <!-- CAPTCHA -->
-            <div class="captcha-container">
-                <div class="g-recaptcha" data-sitekey="6Lec4n0qAAAAAIK9mNhP1PJqyiBPUNjX967yMmJX"></div> <!-- Replace with your site key -->
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
             </div>
 
             <button type="submit">Login</button>
+
+            <p>Don't have an account? <a href="signup.html">Create one</a></p>
         </form>
 
-        <p>Don't have an account? <a href="#" id="signupLink">Create one</a></p>
+        <p id="error-message" style="color: red; display: none;"></p>
     </div>
 
+    <script src="login.js"></script>
 </body>
 </html>
