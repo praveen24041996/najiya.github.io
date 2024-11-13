@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const identifier = document.getElementById('identifier').value;
         const password = document.getElementById('password').value;
 
-        // Simulate login check (this could be a server request in a real app)
+        // Simulate login check by checking if the account exists in localStorage
         if (validateUser(identifier, password)) {
             // Store OTP or user session in sessionStorage
             sessionStorage.setItem('otp', 'someOtpValue');  // Replace with actual OTP logic
@@ -29,10 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const newIdentifier = document.getElementById('newIdentifier').value;
         const newPassword = document.getElementById('newPassword').value;
 
-        // Simulate account creation (this could be a server request in a real app)
+        // Simulate account creation (store account in localStorage)
         if (createAccount(newIdentifier, newPassword)) {
             alert('Account created successfully!');
-            window.location.href = 'index.html';  // Redirect to the main page
+            window.location.href = 'login.html';  // Redirect to the login page after creating account
         } else {
             alert('Account already exists!');
         }
@@ -52,21 +52,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Simulate user validation
     function validateUser(identifier, password) {
-        // Replace this logic with actual authentication (e.g., API call to verify credentials)
-        const mockUser = { email: 'user@example.com', phone: '1234567890', password: 'password123' };
-        return (identifier === mockUser.email || identifier === mockUser.phone) && password === mockUser.password;
+        // Check if account is in localStorage
+        const userAccount = JSON.parse(localStorage.getItem(identifier));
+
+        // If the user exists and the password matches, return true
+        return userAccount && userAccount.password === password;
     }
 
     // Simulate account creation
     function createAccount(identifier, password) {
-        // Replace this logic with actual account creation (e.g., API call to register the user)
-        const existingUsers = ['user@example.com', '1234567890'];  // Replace with actual check
-        if (existingUsers.includes(identifier)) {
+        // Check if account already exists in localStorage
+        if (localStorage.getItem(identifier)) {
             return false;  // Account already exists
         } else {
-            // Simulate storing the new account
-            console.log(`New account created for: ${identifier}`);
-            return true;
+            // Store the new account in localStorage
+            const newAccount = { identifier, password };
+            localStorage.setItem(identifier, JSON.stringify(newAccount));
+            return true;  // Account created successfully
         }
     }
 });
