@@ -7,8 +7,9 @@ body {
     color: #333;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align the login form to the top */
     height: 100vh;
+    padding-top: 50px; /* Add space at the top */
 }
 
 /* Login Container */
@@ -74,6 +75,11 @@ button {
 
 button:hover {
     background-color: #357ae8;
+}
+
+/* CAPTCHA Styling */
+.captcha-container {
+    margin: 20px 0;
 }
 
 /* Link Styling */
